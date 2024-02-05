@@ -19,7 +19,7 @@ public class TelevisionControllerBonus {
     private static final List<String> televisionDatabase = new ArrayList<>();
 
     @GetMapping("/televisions")
-    public ResponseEntity<Object> getAllTelevisions() {
+    public ResponseEntity<List<String>> getAllTelevisions() {
 
         // Return de complete lijst met een 200 status
         return ResponseEntity.ok(televisionDatabase);
@@ -27,7 +27,7 @@ public class TelevisionControllerBonus {
     }
 
     @GetMapping("/televisions/{id}")
-    public ResponseEntity<Object> getTelevision(@PathVariable int id) {
+    public ResponseEntity<String> getTelevision(@PathVariable int id) {
 
         // Return de waarde die op index(id) staat en een 200 status
         // Wanneer de gebruiker een request doet met id=300, maar de lijst heeft maar 3 items.
@@ -37,7 +37,7 @@ public class TelevisionControllerBonus {
     }
 
     @PostMapping("/televisions")
-    public ResponseEntity<Object> addTelevision(@RequestBody String television) {
+    public ResponseEntity<String> addTelevision(@RequestBody String television) {
         // Bonus bonus: check voor 20 letters:
         if(television.length()>20){
             throw new TelevisionNameTooLongException("Televisienaam is te lang");
@@ -51,7 +51,7 @@ public class TelevisionControllerBonus {
     }
 
     @DeleteMapping("/televisions/{id}")
-    public ResponseEntity<Object> deleteTelevision(@PathVariable int id) {
+    public ResponseEntity<Void> deleteTelevision(@PathVariable int id) {
         // Vervang de waarde op index(id) met null. Als we de waarde zouden verwijderen, zouden alle indexen die na deze waarden komen in de lijst met 1 afnemen.
         televisionDatabase.set(id, null);
         // Return een 204 status
@@ -60,7 +60,7 @@ public class TelevisionControllerBonus {
     }
 
     @PutMapping("/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody String television) {
+    public ResponseEntity<Void> updateTelevision(@PathVariable int id, @RequestBody String television) {
         // In de vorige methodes hebben we impliciet gebruik gemaakt van "IndexOUtOfBoundsException" als het id groter was dan de lijst.
         // In deze methode checken we daar expliciet voor en gooien we een custom exception op.
         if(televisionDatabase.isEmpty() || id>televisionDatabase.size()){

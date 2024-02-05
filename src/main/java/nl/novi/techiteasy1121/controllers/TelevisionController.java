@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class TelevisionController {
 
     @GetMapping("/televisions")
-    public ResponseEntity<Object> getAllTelevisions() {
+    public ResponseEntity<String> getAllTelevisions() {
 
         // Return een String met een 200 status
         return ResponseEntity.ok("televisions");
@@ -16,7 +16,7 @@ public class TelevisionController {
     }
 
     @GetMapping("/televisions/{id}")
-    public ResponseEntity<Object> getTelevision(@PathVariable("id") int id) {
+    public ResponseEntity<String> getTelevision(@PathVariable("id") int id) {
 
         // return een String met een 200 status
         return ResponseEntity.ok("television with id: " + id);
@@ -24,7 +24,7 @@ public class TelevisionController {
     }
 
     @PostMapping("/televisions")
-    public ResponseEntity<Object> addTelevision(@RequestBody String television) {
+    public ResponseEntity<String> addTelevision(@RequestBody String television) {
 
         // Return een String met een 201 status
         //De null van created zal over een paar weken vervangen worden door een gegenereerde url.
@@ -33,7 +33,7 @@ public class TelevisionController {
     }
 
     @DeleteMapping("/televisions/{id}")
-    public ResponseEntity<Object> deleteTelevision(@PathVariable int id) {
+    public ResponseEntity<Void> deleteTelevision(@PathVariable int id) {
 
         //Return een 204 status
         return ResponseEntity.noContent().build();
@@ -41,7 +41,7 @@ public class TelevisionController {
     }
 
     @PutMapping("/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody String television) {
+    public ResponseEntity<Void> updateTelevision(@PathVariable int id, @RequestBody String television) {
 
         // Return een 204 status
         return ResponseEntity.noContent().build();
